@@ -101,22 +101,18 @@ javascript:(function(){
                 setTimeout(() => { clearInterval(clicks); }, duration * 1000);
             }
         },
-        "Set Cookies": () => { 
-            const amount = prompt("Enter the amount of cookies to set:", "1000000");
-            if (amount) { Game.cookies = parseInt(amount, 10); }
-        },
-        "Set Building Amount": () => { 
-            const buildingName = prompt("Enter the building name:");
-            const amount = prompt("Enter the amount to set:");
-            if (buildingName && amount) { 
-                Game.Objects[buildingName].amount = parseInt(amount, 10); 
-                Game.Objects[buildingName].refresh();
+        "Set Building Amount": () => {
+            const building = prompt("Enter the building name (e.g., 'Cursor', 'Grandma'):");
+            const amount = prompt("Enter the number of buildings you want:");
+            if (building && amount) {
+                Game.Objects[building].amount = parseInt(amount, 10);
+                Game.Objects[building].buyFunction = () => {};
             }
         },
-        "Reset Game": () => { 
-            if (confirm("Are you sure you want to reset the game?")) { 
-                Game.Reset(); 
-            }
+        "Reset Game": () => { Game.HardReset(); },
+        "Set Sugar Lumps": () => {
+            const lumps = prompt("Enter the number of sugar lumps you want:", "1");
+            if (lumps) { Game.lumps = parseInt(lumps, 10); }
         }
     };
 
@@ -144,7 +140,7 @@ javascript:(function(){
     menu.appendChild(title);
 
     const subtitle = document.createElement('p');
-    subtitle.innerText = 'Made by Lil Skittle V1.2';
+    subtitle.innerText = 'Made by Lil Skittle V1.2.1';
     subtitle.style.fontSize = '12px';
     subtitle.style.marginTop = '5px';
     menu.appendChild(subtitle);
